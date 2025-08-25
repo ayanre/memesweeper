@@ -24,8 +24,10 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	field(15)
 {
+	field.settoreveal();
 }
 
 void Game::Go()
@@ -42,4 +44,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	field.Draw(gfx);
 }
