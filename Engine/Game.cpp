@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	field(15)
+	field(10)
 {
 }
 
@@ -60,5 +60,6 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	gfx.DrawRect(240, 210, 504, 362, Colors::Blue);
 	field.Draw(gfx);
 }

@@ -30,11 +30,11 @@ Memefield::Memefield(int nMemes)
 }
 
 void Memefield::Draw(Graphics& gfx) {
-	gfx.DrawRect(0, 0, width * SpriteCodex::tileSize, height * SpriteCodex::tileSize, SpriteCodex::baseColor);
+	gfx.DrawRect(left, top, left + width * SpriteCodex::tileSize, top + height * SpriteCodex::tileSize, SpriteCodex::baseColor);
 
 	for (Vei2 pos = { 0,0 }; pos.y < height; pos.y++) {
 		for (pos.x = 0; pos.x < width; pos.x++) {
-			tileAt(pos).Draw({ pos.x * SpriteCodex::tileSize, pos.y * SpriteCodex::tileSize }, gfx, isFucked);
+			tileAt(pos).Draw({ left + pos.x * SpriteCodex::tileSize, top + pos.y * SpriteCodex::tileSize }, gfx, isFucked);
 		}
 	}
 }
@@ -84,13 +84,14 @@ int Memefield::calcNeighbouringMemes(Vei2& pos)
 Vei2 Memefield::screenPosToPos(Vei2 screenPos)
 {
 	if (getRect().isInsideOf(screenPos)) {
-		return (screenPos / (SpriteCodex::tileSize));
+		Vei2 newscreenPos = { screenPos.x - left, screenPos.y - top };
+		return (newscreenPos / (SpriteCodex::tileSize));
 	}
 }
 
 RectI Memefield::getRect()
 {
-	return RectI(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize);
+	return RectI(left, left + width * SpriteCodex::tileSize, top, top + height * SpriteCodex::tileSize);
 }
 
 void Memefield::Tile::toggleFlagStatus()
