@@ -12,6 +12,7 @@ public:
 	bool IsOverlappingWith( const RectI& other ) const;
 	bool IsContainedBy( const RectI& other ) const;
 	static RectI FromCenter( const Vei2& center,int halfWidth,int halfHeight );
+	bool isInsideOf(Vei2& screenPos);
 	RectI GetExpanded( int offset ) const;
 	Vei2 GetCenter() const;
 public:

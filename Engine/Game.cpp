@@ -27,7 +27,6 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	field(15)
 {
-	field.settoreveal();
 }
 
 void Game::Go()
@@ -40,6 +39,23 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	while (!wnd.mouse.IsEmpty()) {
+		const Mouse::Event e = wnd.mouse.Read();
+
+		if (e.GetType() == Mouse::Event::Type::LPress) {
+			Vei2 mousePos = e.GetPos();
+			if (field.getRect().isInsideOf(mousePos)){
+				field.tileReveal(mousePos);
+			}
+		}
+
+		if (e.GetType() == Mouse::Event::Type::RPress) {
+			Vei2 mousePos = e.GetPos();
+			if (field.getRect().isInsideOf(mousePos)) {
+				field.toggleFlag(mousePos);
+			}
+		}
+	}
 }
 
 void Game::ComposeFrame()

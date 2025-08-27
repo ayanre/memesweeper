@@ -39,6 +39,12 @@ RectI RectI::FromCenter( const Vei2 & center,int halfWidth,int halfHeight )
 	return RectI( center - half,center + half );
 }
 
+bool RectI::isInsideOf(Vei2& screenPos)
+{
+	return ((screenPos.x >= left && screenPos.x <= right) &&
+		(screenPos.y >= top && screenPos.y <= bottom));
+}
+
 RectI RectI::GetExpanded( int offset ) const
 {
 	return RectI( left - offset,right + offset,top - offset,bottom + offset );
